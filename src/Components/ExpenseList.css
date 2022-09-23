@@ -1,0 +1,9 @@
+.todo-items{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 4rem auto;
+    background-color: rgb(30, 17, 79);
+    border-radius: 10px;
+}
+

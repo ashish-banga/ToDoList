@@ -1,0 +1,48 @@
+.main-div{
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+    text-align: left;
+    margin: 1rem auto;
+}
+
+.input label{
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.input input{
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 17.75rem;
+    max-width: 100%;
+    justify-content: space-evenly;
+}
+
+.input_actions{
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 3.15rem 1rem;
+}
+
+.input_actions button{
+    padding: 0.8rem;
+    border-radius: 8px;
+    width: 10rem;
+    font-weight: bold;
+    font-size:medium;
+    color: crimson;
+}
+
+.form_area{
+    padding: 1.5rem 0;
+    background-color: rgb(30, 17, 79);
+    width: 90%;
+    margin: 1.5rem auto;
+    border-radius: 10px;
+}

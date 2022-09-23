@@ -1,0 +1,8 @@
+.todo-items-list{
+    color: black;
+    width: 50%;
+    background-color: aqua;
+    margin: 3rem;
+    border-radius: 8px;
+    padding: 1rem;
+}

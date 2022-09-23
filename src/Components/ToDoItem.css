@@ -1,0 +1,29 @@
+ul{
+    padding: 0;
+}
+.item-details{
+    display: flex;
+    gap: 0.5rem;
+}
+.item-actions{
+    display: flex;
+    gap: 1rem;
+}
+.complete-item{
+    text-align: left;
+    font-weight: bold;
+    display: flex;
+    gap: 2rem;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    justify-content: space-between;
+    background-color: rgb(56, 166, 185);
+    border-radius: 6px;
+    align-items: center;
+}
+.item-details p {
+ width: 4rem;
+}
+.todo-details{
+    width: 8rem !important;
+}
