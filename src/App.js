@@ -1,88 +1,56 @@
-// import React from "react";
-// import { connect } from "react-redux";
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//   render() {
-//     return (
-//       <>
-//         <div>Count: {this.props.count}</div>
-//         <button onClick={() => this.props.onAdd()}>Add</button>
-//         <button onClick={this.props.onSub}>Sub</button>
-//       </>
-//     );
-//   }
-// }
-
-// // providing updated State to the component through the store.
-
-// const mapStateToProps = (state) => {
-//   return {
-//     count: state.count,
-//   };
-// };
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onAdd: () => dispatch({ type: "ADD" }),
-//     onSub: () => dispatch({ type: "SUBTRACT" }),
-//   };
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import ExpenseForm from "./Components/ExpenseForm";
 import ExpenseList from "./Components/ExpenseList";
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  COMPLETE_TODO,
+  DELETE_COMPLETED_TODO,
+  UPDATE_TODO,
+} from "./Redux/Actions";
 const App = (props) => {
-  const ToDoItems = [
-    { ToDo: "Buy Apple", Quantity: "2", Amount: "300" },
-    { ToDo: "Buy Mango", Quantity: "3", Amount: "100" },
-    { ToDo: "Buy Milk", Quantity: "1", Amount: "500" },
-  ];
-  const [toDoList, setToDoList] = useState(ToDoItems);
+  const toDoList = useSelector((state) => state?.toDoReducer?.toDoList);
+  const completedList = useSelector(
+    (state) => state?.toDoReducer?.completedList
+  );
+  const dispatch = useDispatch();
   const submitToDoHandler = (toDoDetails) => {
     if (actionType == "edit") {
       toDoList[activeIndex].ToDo = toDoDetails.ToDo;
       toDoList[activeIndex].Quantity = toDoDetails.Quantity;
       toDoList[activeIndex].Amount = toDoDetails.Amount;
-      setToDoList([...toDoList]);
+      dispatch({ type: UPDATE_TODO, val: toDoList });
       setActionType("");
+      setActiveIndex(null);
     } else {
-      setToDoList([...toDoList, toDoDetails]);
+      const addTodo = [...toDoList, toDoDetails];
+      dispatch({ type: UPDATE_TODO, val: addTodo });
     }
   };
 
-  console.log("toDoList", toDoList);
-  const [completedList, setCompletedList] = useState([]);
   const [activeIndex, setActiveIndex] = useState();
   const [actionType, setActionType] = useState();
-  useEffect(() => {
-    console.log("Use Effect use");
-  }, [toDoList]);
+
   const ToDoAction = (i, actionType) => {
-    console.log(19, i, actionType, toDoList[i]);
     if (actionType == "delete") {
       toDoList.splice(i, 1);
-      setToDoList([...toDoList]);
+      dispatch({ type: UPDATE_TODO, val: toDoList });
     }
     if (actionType == "complete") {
-      setCompletedList([toDoList[i], ...completedList]);
+      let newList = [toDoList[i], ...completedList];
+      dispatch({ type: COMPLETE_TODO, val: newList });
       toDoList.splice(i, 1);
-      setToDoList([...toDoList]);
+      dispatch({ type: UPDATE_TODO, val: toDoList });
     }
     if (actionType == "deleteCompleted") {
       completedList.splice(i, 1);
-      setCompletedList([...completedList]);
+      dispatch({ type: DELETE_COMPLETED_TODO, val: completedList });
     }
     if (actionType == "edit") {
       setActiveIndex(i);
       setActionType(actionType);
     }
   };
-  console.log(29, completedList);
-
   return (
     <div className="App">
       <h1>ToDo List</h1>
